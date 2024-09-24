@@ -1,0 +1,246 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+button,
+input {
+  padding: 0.5rem 1rem;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+label {
+  font-weight: 400;
+}
+
+header {
+  background: rgb(255, 229, 81);
+  padding: 16px;
+  color: white;
+  width: 100%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+  text-align: center;
+}
+
+#form {
+  grid-area: form;
+}
+
+#note {
+  grid-area: note;
+}
+
+main {
+  width: 100%;
+  padding-block: 2rem;
+  min-height: 100vh;
+}
+
+/* section {
+
+} */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5px;
+  display: grid;
+  gap: 1rem;
+  grid-template-areas:
+    "form form form form "
+    "form form form form "
+    "note note note note "
+    "note note note note ";
+}
+
+/* ADD NOTES */
+.addNotes {
+  background: rgb(255, 255, 255);
+  color: white;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 50px;
+  height: 30rem;
+
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border: 0.1px solid rgb(122, 122, 122);
+  border-radius: 10px;
+}
+
+.addNotes h2 {
+  font-weight: bold;
+  color: rgb(35, 35, 50);
+  text-align: center;
+  padding-bottom: 0.25rem;
+}
+
+#notesForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: rgb(44, 44, 44);
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.5rem 6rem;
+  border-radius: 0.25rem;
+}
+
+#notesFormTitle,
+#notesFormDate {
+  padding: 0.5rem 1rem;
+  height: 3rem;
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 100%;
+}
+
+textarea {
+  resize: none;
+}
+
+#notesFormDescription {
+  width: 100%;
+  height: 100px;
+  padding: 0.5rem 1rem;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.label-judul {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+#notesFormSubmit {
+  background: rgb(255, 242, 120);
+  border: 2px solid black;
+  border-radius: 10px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  align-self: end;
+}
+
+#notesFormSubmit:hover {
+  background: rgb(236, 222, 97);
+}
+#notesFormSubmit:active {
+  background: rgb(255, 252, 90);
+}
+/* ADD NOTES */
+
+#buttonMyNotes {
+  background: rgb(255, 242, 120);
+  border: 2px solid black;
+  border-radius: 10px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+/* MY NOTES */
+.myNotes {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border: 0.1px solid rgb(122, 122, 122);
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+.myNotes * p {
+  margin-block: 1rem;
+  color: rgb(0, 0, 0);
+}
+.myNotes * h3 {
+  color: rgb(0, 0, 0);
+}
+
+.myNotes h2 {
+  text-align: center;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  font-size: 1.25rem;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  padding-bottom: 0.5rem;
+  grid-column: span 2;
+}
+
+#notesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 0.2rem;
+  padding: 2rem;
+  background: rgb(255, 255, 255);
+  border: 0.5px solid black;
+  border-radius: 10px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+#unarchivedButton,
+#archivedButton,
+#deleteButton {
+  background: rgb(255, 242, 120);
+  border: 2px solid black;
+  border-radius: 10px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+#archivedButton:hover,
+#unarchivedButton:hover,
+#deleteButton:hover {
+  background: rgb(255, 242, 120);
+  color: rgb(255, 255, 255);
+}
+#archivedButton:active,
+#unarchivedButton:active,
+#deleteButton:active {
+  background: rgb(255, 242, 120);
+}
+/* MY NOTES */
+
+/* FOOTER */
+footer {
+  background: rgb(22, 20, 0);
+  padding: 5px;
+  color: white;
+  width: 100%;
+}
+footer p {
+  text-align: center;
+}
+/* FOOTER */
+
+/* media query */
+@media screen and (max-width: 768px) {
+  .container {
+    grid-template-areas:
+      "form form"
+      "form form"
+      "note note"
+      "note note";
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    grid-template-areas:
+      "form"
+      "form"
+      "note"
+      "note";
+  }
+  .trash-button,
+  .check-button,
+  .edit-button,
+  .undo-button {
+    padding: 0.25rem 0.5rem;
+    margin-inline: 0 0.2rem;
+  }
+}
