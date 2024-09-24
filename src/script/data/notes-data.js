@@ -110,33 +110,4 @@ class notesData {
   static getAll() {
     return notesData;
   }
-  static add(note) {
-    notesData.push(note);
-  }
-  static edit(note) {
-    const index = notesData.findIndex((n) => n.id === note.id);
-    if (index !== -1) {
-      notesData[index] = note;
-    }
-  }
-  static delete(id) {
-    const index = notesData.findIndex((n) => n.id === id);
-    if (index !== -1) {
-      notesData.splice(index, 1);
-    }
-  }
-  static archive(id) {
-    const note = this.getById(id);
-    if (note) {
-      note.archived = true;
-    }
-  }
-  static unarchive(id) {
-    const note = this.getById(id);
-    if (note) {
-      note.archived = false;
-    }
-  }
 }
-
-console.log(notesData);
