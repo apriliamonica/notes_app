@@ -3,7 +3,7 @@ import NotesData from "../data/notes-data.js";
 function buatItem(notesList) {
   const notesContainer = document.querySelector("notes-list");
 
-  function createNoteItemElement({ title, body }) {  
+  function createNoteItemElement({ title, body }) {
     return `
     <div class="notesList">
       <h3 class="notesItemTitle">${title}</h3>
@@ -21,7 +21,7 @@ function buatItem(notesList) {
     return createNoteItemElement(note);
   });
 
-  notesContainer.innerHTML = noteItems.join('');
+  notesContainer.innerHTML = noteItems.join("");
 }
 
 const home = () => {
