@@ -1,4 +1,5 @@
-import NotesData from "../data/notes-data.js";
+// import NotesData from "../data/notes-data.js";
+import notesapi from "../data/notes-api.js";
 
 function buatItem(notesList) {
   const notesContainer = document.querySelector("notes-list");
@@ -25,7 +26,7 @@ function buatItem(notesList) {
 }
 
 const home = () => {
-  const notes = NotesData.getAll();
+  const notes = notesapi.getAll();
   console.log(notes);
 
   buatItem(notes);
