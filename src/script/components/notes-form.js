@@ -1,10 +1,10 @@
 import {
-    customValidationTitleHandler,
-    customValidationDescriptionHandler,
-  } from "../utility/customValidation.js";
+  customValidationTitleHandler,
+  customValidationDescriptionHandler,
+} from "../utility/customValidation.js";
 import Utils from "../utility/utils.js";
 import { buatItem } from "../view/home.js";
-import NotesData from "../data/notes-data.js";
+import notesapi from "../data/notes-api.js";
 
 class NotesForm extends HTMLElement {
   _shadowRoot = null;
@@ -17,7 +17,7 @@ class NotesForm extends HTMLElement {
   }
 
   _updateStyle() {
-  this._style.textContent = `          
+    this._style.textContent = `          
       * {
         padding: 0;
         margin: 0;
@@ -83,10 +83,11 @@ class NotesForm extends HTMLElement {
       }
           
       #notesFormSubmit:hover {
-        background: rgb(236, 222, 97);
+           background: rgb(243, 232, 138);
+          color: rgb(0, 0, 0);
       }
       #notesFormSubmit:active {
-        background: rgb(255, 252, 90);
+        background: rgb(248, 230, 69);
       }
           
       .validation-message {
@@ -104,15 +105,15 @@ class NotesForm extends HTMLElement {
   _tambahNotes() {
     const form = this._shadowRoot.querySelector("#notesForm");
     let arrNotes = [];
-    const notes = NotesData.getAll();
+    const notes = notesapi.getNotesnonArchived();
 
-    function notesBaru(){
+    function notesBaru() {
       const id = Utils.buatIdUnik();
       const title = form.elements["title"].value;
       const body = form.elements["description"].value;
       const createdAt = Utils.buatCreatedAt();
       const archived = false;
-      
+
       const newNote = Utils.makeNewNote(id, title, body, createdAt, archived);
 
       return newNote;
@@ -120,70 +121,72 @@ class NotesForm extends HTMLElement {
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      
-      arrNotes = [...notes, notesBaru()];
-      
+
+      arrNotes = [notes, notesBaru()];
+
       buatItem(arrNotes);
       form.reset();
     });
-
   }
+
   _validateForm() {
-      const form = this._shadowRoot.querySelector("#notesForm");
-      const titleOnInput = form.elements["title"];
-      const descriptionOnInput = form.elements["description"];
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-      });
-  
-      titleOnInput.addEventListener("change", customValidationTitleHandler);
-      titleOnInput.addEventListener("invalid", customValidationTitleHandler);
-  
-      titleOnInput.addEventListener("blur", (event) => {
-        // Validate the field
-        const isValid = event.target.validity.valid;
-        const errorMessage = event.target.validationMessage;
-      
-        const connectedValidationId = event.target.getAttribute("aria-describedby");
-        const connectedValidationEl = connectedValidationId
-          ? this._shadowRoot.getElementById(connectedValidationId)
-          : null;
-      
-        if (connectedValidationEl && errorMessage && !isValid) {
-          connectedValidationEl.innerText = errorMessage;
-        } else {
-          connectedValidationEl.innerText = "";
-        }
-      });
-  
-      descriptionOnInput.addEventListener(
-        "change",
-        customValidationDescriptionHandler
-      );
-      descriptionOnInput.addEventListener(
-        "invalid",
-        customValidationDescriptionHandler
-      );
-  
-      descriptionOnInput.addEventListener("blur", (event) => {
-        const isValidsecription = event.target.validity.valid;
-        const errorMessageDescription = event.target.validationMessage;
-      
-        const connectedValidationId = event.target.getAttribute("aria-describedby");
-        const connectedValidationEl = connectedValidationId
-          ? this._shadowRoot.getElementById(connectedValidationId)
-          : null;
-      
-        if (
-          connectedValidationEl &&
-          errorMessageDescription &&
-          !isValidsecription
-        ) {
-          connectedValidationEl.innerText = errorMessageDescription;
-        } else {
-          connectedValidationEl.innerText = "";
-        }
-      });
+    const form = this._shadowRoot.querySelector("#notesForm");
+    const titleOnInput = form.elements["title"];
+    const descriptionOnInput = form.elements["description"];
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+    });
+
+    titleOnInput.addEventListener("change", customValidationTitleHandler);
+    titleOnInput.addEventListener("invalid", customValidationTitleHandler);
+
+    titleOnInput.addEventListener("blur", (event) => {
+      // Validate the field
+      const isValid = event.target.validity.valid;
+      const errorMessage = event.target.validationMessage;
+
+      const connectedValidationId =
+        event.target.getAttribute("aria-describedby");
+      const connectedValidationEl = connectedValidationId
+        ? this._shadowRoot.getElementById(connectedValidationId)
+        : null;
+
+      if (connectedValidationEl && errorMessage && !isValid) {
+        connectedValidationEl.innerText = errorMessage;
+      } else {
+        connectedValidationEl.innerText = "";
+      }
+    });
+
+    descriptionOnInput.addEventListener(
+      "change",
+      customValidationDescriptionHandler
+    );
+    descriptionOnInput.addEventListener(
+      "invalid",
+      customValidationDescriptionHandler
+    );
+
+    descriptionOnInput.addEventListener("blur", (event) => {
+      const isValidsecription = event.target.validity.valid;
+      const errorMessageDescription = event.target.validationMessage;
+
+      const connectedValidationId =
+        event.target.getAttribute("aria-describedby");
+      const connectedValidationEl = connectedValidationId
+        ? this._shadowRoot.getElementById(connectedValidationId)
+        : null;
+
+      if (
+        connectedValidationEl &&
+        errorMessageDescription &&
+        !isValidsecription
+      ) {
+        connectedValidationEl.innerText = errorMessageDescription;
+      } else {
+        connectedValidationEl.innerText = "";
+      }
+    });
   }
 
   connectedCallback() {

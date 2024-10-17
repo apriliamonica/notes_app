@@ -37,7 +37,6 @@ class NotesList extends HTMLElement {
         width: 100%;
         overflow: auto;
         max-height: ${this.maxheight}rem;
-        border: 2px solid black;
         padding: 1rem;
       }
     `;

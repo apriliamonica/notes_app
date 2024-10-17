@@ -1,22 +1,6 @@
 const BASE_URL = "https://notes-api.dicoding.dev/v2";
 
 class notesapi {
-  static async getNote() {
-    try {
-      const response = await fetch(`${BASE_URL}/notes`);
-      const responseJson = await response.json();
-
-      if (responseJson.error) {
-        showResponseMessage(responseJson.message);
-      } else {
-        renderAllBooks(responseJson.notes);
-      }
-    } catch (error) {
-      console.error(error);
-      throw new Error(`Failed : ${error}`);
-    }
-  }
-
   static async createNote(note_id) {
     try {
       const response = await fetch(`${BASE_URL}/notes`, {
@@ -41,20 +25,11 @@ class notesapi {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          title: "New Note",
-          body: "My new note.",
-        }),
       });
       const responseJson = await response.json();
-
-      if (responseJson.error) {
-        showResponseMessage(responseJson.message);
-      } else {
-        renderAllBooks(responseJson);
-      }
+      return responseJson.data;
     } catch (error) {
-      showResponseMessag(error);
+      console.log(data);
     }
   }
 
@@ -71,12 +46,7 @@ class notesapi {
         }),
       });
       const responseJson = await response.json();
-
-      if (responseJson.error) {
-        showResponseMessage(responseJson.message);
-      } else {
-        renderAllBooks(responseJson);
-      }
+      return responseJson.data;
     } catch (error) {
       showResponseMessag(error);
     }
@@ -89,13 +59,8 @@ class notesapi {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          title: "New Note",
-          body: "My new note.",
-        }),
       });
       const responseJson = await response.json();
-
       if (responseJson.error) {
         showResponseMessage(responseJson.message);
       } else {
@@ -113,10 +78,6 @@ class notesapi {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          title: "New Note",
-          body: "My new note.",
-        }),
       });
       const responseJson = await response.json();
 
@@ -147,6 +108,7 @@ class notesapi {
     }
   }
 }
+
 export default notesapi;
 
 // const getSingleNote = async (note_id) => {
