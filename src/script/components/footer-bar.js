@@ -7,7 +7,7 @@ class FooterBar extends HTMLElement {
     this._shadowRoot = this.attachShadow({ mode: "open" });
     this._style = document.createElement("style");
   }
-  
+
   _updateStyle() {
     this._style.textContent = `
       div {

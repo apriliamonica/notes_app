@@ -22,7 +22,7 @@ export const customValidationDescriptionHandler = (event) => {
 
   if (event.target.validity.tooShort) {
     event.target.setCustomValidity(
-      "Minimal panjang adalah sepuluh karakter...."
+      "Minimal panjang adalah sepuluh karakter....",
     );
     return;
   }

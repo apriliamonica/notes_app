@@ -102,10 +102,8 @@ class NotesForm extends HTMLElement {
    `;
   }
 
-  _tambahNotes() {
+  async _tambahNotes() {
     const form = this._shadowRoot.querySelector("#notesForm");
-    let arrNotes = [];
-    const notes = notesapi.getNotesnonArchived();
 
     function notesBaru() {
       const id = Utils.buatIdUnik();
@@ -119,13 +117,13 @@ class NotesForm extends HTMLElement {
       return newNote;
     }
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-
-      arrNotes = [notes, notesBaru()];
-
-      buatItem(arrNotes);
+      await notesapi.createNote(notesBaru());
+      const notes = await notesapi.getNotesnonArchived();
+      buatItem(notes);
       form.reset();
+      return;
     });
   }
 
@@ -160,11 +158,11 @@ class NotesForm extends HTMLElement {
 
     descriptionOnInput.addEventListener(
       "change",
-      customValidationDescriptionHandler
+      customValidationDescriptionHandler,
     );
     descriptionOnInput.addEventListener(
       "invalid",
-      customValidationDescriptionHandler
+      customValidationDescriptionHandler,
     );
 
     descriptionOnInput.addEventListener("blur", (event) => {
